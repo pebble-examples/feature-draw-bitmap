@@ -19,11 +19,7 @@ static void layer_update_callback(Layer *layer, GContext* ctx) {
   // will automatically tile. Which might be what *you* want.
   const uint8_t offset = PBL_IF_ROUND_ELSE(17, 0);
 
-#ifdef PBL_SDK_3
   GSize image_size = gbitmap_get_bounds(s_image).size;
-#else 
-  GSize image_size = s_image->bounds.size;
-#endif
 
   graphics_draw_bitmap_in_rect(ctx, s_image, GRect(5 + offset, 5 + offset, image_size.w, 
                                image_size.h));
