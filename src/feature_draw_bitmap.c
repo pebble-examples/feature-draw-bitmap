@@ -17,15 +17,14 @@ static void layer_update_callback(Layer *layer, GContext* ctx) {
   // We make sure the dimensions of the GRect to draw into
   // are equal to the size of the bitmap--otherwise the image
   // will automatically tile. Which might be what *you* want.
+  const uint8_t offset = PBL_IF_ROUND_ELSE(17, 0);
 
-#ifdef PBL_PLATFORM_BASALT
   GSize image_size = gbitmap_get_bounds(s_image).size;
-#else 
-  GSize image_size = s_image->bounds.size;
-#endif
 
-  graphics_draw_bitmap_in_rect(ctx, s_image, GRect(5, 5, image_size.w, image_size.h));
-  graphics_draw_bitmap_in_rect(ctx, s_image, GRect(80, 60, image_size.w, image_size.h));
+  graphics_draw_bitmap_in_rect(ctx, s_image, GRect(5 + offset, 5 + offset, image_size.w, 
+                               image_size.h));
+  graphics_draw_bitmap_in_rect(ctx, s_image, GRect(80 + offset, 60 + offset, image_size.w, 
+                               image_size.h));
 }
 
 static void main_window_load(Window *window) {
